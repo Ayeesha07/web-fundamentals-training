@@ -1,0 +1,275 @@
+/* ==========================================================
+   Cartly: Activity 2 solution
+   Mobile-first: base styles are for phones,
+   media queries add layout for bigger screens.
+   ========================================================== */
+
+/* 1. Design tokens (CSS variables) */
+:root {
+  --color-ink: #222322;
+  --color-text: #3a3d3a;
+  --color-muted: #5f645f;
+  --color-bg: #f6f7f2;
+  --color-surface: #ffffff;
+  --color-line: #e2e5dc;
+  --color-accent: #d3ff50;
+  --color-accent-dark: #4d6b00;
+  --radius: 12px;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --max-width: 1200px;
+  --font: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+}
+
+/* 2. Reset */
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, h3, p, ul { margin: 0; }
+ul[class] { list-style: none; padding: 0; }
+img { max-width: 100%; height: auto; display: block; }
+
+body {
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+h1, h2, h3 { color: var(--color-ink); line-height: 1.2; }
+a { color: var(--color-accent-dark); }
+
+/* 3. Accessibility helpers */
+.skip-link {
+  position: absolute;
+  left: var(--space-2);
+  top: -100px;
+  background: var(--color-ink);
+  color: #fff;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius);
+  z-index: 100;
+}
+.skip-link:focus { top: var(--space-1); }
+
+:focus-visible {
+  outline: 3px solid var(--color-accent-dark);
+  outline-offset: 2px;
+}
+
+/* 4. Buttons */
+.btn {
+  display: inline-block;
+  font: inherit;
+  font-weight: 600;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius);
+  border: 2px solid var(--color-ink);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: var(--color-ink); color: #fff; }
+.btn-primary { background: var(--color-accent); border-color: var(--color-accent); }
+.btn-primary:hover { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-accent); }
+
+/* 5. Header: Flexbox, sticky */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+.nav-list { display: flex; gap: var(--space-2); }
+.nav-list a { color: var(--color-ink); text-decoration: none; font-weight: 600; }
+.nav-list a:hover, .nav-list a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent-dark);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}
+
+.search { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1); width: 100%; }
+.search label { width: 100%; font-size: 0.875rem; color: var(--color-muted); }
+.search input {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  padding: 0.55rem 0.8rem;
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius);
+}
+
+/* 6. Layout containers */
+main { max-width: var(--max-width); margin: 0 auto; padding: var(--space-2); }
+section { margin-bottom: var(--space-4); }
+h2 { font-size: 1.6rem; }
+.section-sub { color: var(--color-muted); margin-bottom: var(--space-3); }
+
+/* 7. Hero */
+.hero {
+  display: grid;
+  gap: var(--space-3);
+  align-items: center;
+  background: var(--color-ink);
+  color: #e8ebe3;
+  border-radius: calc(var(--radius) * 2);
+  padding: var(--space-3);
+  margin-top: var(--space-2);
+  overflow: hidden;
+}
+.hero h1 { color: #fff; font-size: 2rem; margin-bottom: var(--space-1); }
+.hero p { margin-bottom: var(--space-3); }
+.hero img { border-radius: var(--radius); }
+
+/* 8. Product grid: responsive without media queries */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-2);
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  height: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-2);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.card:hover { box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08); transform: translateY(-2px); }
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 4px);
+  margin-bottom: var(--space-1);
+}
+.card-category { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-muted); }
+.card-title { font-size: 1.05rem; }
+.card-title a { color: var(--color-ink); text-decoration: none; }
+.card-title a:hover { text-decoration: underline; }
+.card-price { font-size: 1.2rem; font-weight: 700; color: var(--color-ink); }
+.card-rating { font-size: 0.875rem; color: var(--color-muted); }
+.card .btn { margin-top: auto; }
+
+/* 9. Newsletter */
+.newsletter {
+  background: var(--color-surface);
+  border: 2px solid var(--color-ink);
+  border-radius: calc(var(--radius) * 2);
+  padding: var(--space-3);
+}
+.newsletter p { margin: var(--space-1) 0 var(--space-2); }
+.newsletter-form { display: flex; flex-direction: column; gap: var(--space-1); }
+.newsletter-form label { font-weight: 600; }
+.newsletter-form input {
+  font: inherit;
+  padding: 0.6rem 0.8rem;
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius);
+}
+
+/* 10. Footer */
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-2);
+  background: var(--color-ink);
+  color: #c9cec4;
+}
+.site-footer a { color: var(--color-accent); }
+.footer-links { display: flex; gap: var(--space-2); }
+
+/* ---------- Tablet and up ---------- */
+@media (min-width: 768px) {
+  .site-header { flex-wrap: nowrap; padding: var(--space-2) var(--space-3); }
+  .search { width: auto; flex-wrap: nowrap; }
+  .search label {
+    /* visually hidden but still read by screen readers */
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+  }
+  .hero { grid-template-columns: 1fr 1fr; padding: var(--space-4); }
+  .hero h1 { font-size: 2.6rem; }
+  .newsletter-form { flex-direction: row; align-items: end; }
+  .newsletter-form label { align-self: center; }
+  .newsletter-form input { flex: 1; }
+  .site-footer { flex-direction: row; justify-content: space-between; padding: var(--space-3); }
+}
+
+/* ---------- Desktop and up ---------- */
+@media (min-width: 1024px) {
+  main { padding: var(--space-3); }
+  .hero h1 { font-size: 3rem; }
+}
+
+/* ==========================================================
+   Activity 3 additions: UI states
+   ========================================================== */
+.status { color: var(--color-muted); margin-bottom: var(--space-2); min-height: 1.5em; }
+.status.is-error { color: #a4161a; font-weight: 600; }
+
+.state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-4) var(--space-2);
+  background: var(--color-surface);
+  border: 2px dashed var(--color-line);
+  border-radius: var(--radius);
+}
+.state h3 { margin-bottom: var(--space-1); }
+.state .btn { margin-top: var(--space-2); }
+
+/* Skeleton cards while loading */
+.skeleton {
+  height: 380px;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, #eceee8 25%, #f6f7f2 50%, #eceee8 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer { to { background-position: -200% 0; } }
+@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } }
+
+/* ==========================================================
+   Activity 4 additions: list toolbar, detail and about screens
+   ========================================================== */
+main:focus { outline: none; }
+.toolbar { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: end; justify-content: space-between; margin: var(--space-3) 0 var(--space-2); }
+.toolbar .search { width: auto; flex: 1; max-width: 480px; }
+
+.back-link { display: inline-block; margin: var(--space-3) 0 var(--space-2); font-weight: 600; }
+
+.detail {
+  display: grid;
+  gap: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: calc(var(--radius) * 2);
+  padding: var(--space-3);
+}
+.detail img { width: 100%; aspect-ratio: 1 / 1; object-fit: contain; background: var(--color-bg); border-radius: var(--radius); }
+.detail h1 { font-size: 2rem; margin: var(--space-1) 0; }
+.detail .price { font-size: 1.6rem; font-weight: 700; color: var(--color-ink); }
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 0.25rem var(--space-2); margin: var(--space-2) 0; }
+.facts dt { color: var(--color-muted); }
+.facts dd { margin: 0; font-weight: 600; }
+.stock-low { color: #a4161a; }
+
+.prose { max-width: 680px; margin-top: var(--space-3); }
+.prose p { margin-bottom: var(--space-2); }
+
+@media (min-width: 768px) {
+  .detail { grid-template-columns: 1fr 1fr; padding: var(--space-4); }
+}

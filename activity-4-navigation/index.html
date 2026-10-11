@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cartly | Everyday essentials, delivered fast</title>
+  <meta name="description" content="Shop beauty, fragrance and everyday essentials at Cartly. Free delivery on orders over $25.">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+
+  <!-- Link previews (LinkedIn, WhatsApp, Slack) -->
+  <meta property="og:title" content="Cartly | Everyday essentials, delivered fast">
+  <meta property="og:description" content="Beauty, fragrance and more. Free delivery on orders over $25.">
+  <meta property="og:image" content="images/hero.svg">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <a href="#/" class="logo"><img src="images/logo.svg" alt="Cartly home" width="160" height="40"></a>
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="#/" data-route="">Products</a></li>
+        <li><a href="#/about" data-route="about">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <!-- The router renders the current screen in here -->
+    <div id="app"></div>
+  </main>
+
+  <footer class="site-footer">
+    <ul class="footer-links">
+      <li><a href="mailto:hello@cartly.example">Contact us</a></li>
+      <li><a href="#/about">About Cartly</a></li>
+    </ul>
+    <p>&copy; <span id="year"></span> Cartly</p>
+  </footer>
+</body>
+</html>
